@@ -25,6 +25,8 @@ const useStyles = makeStyles((theme) => ({
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
     backgroundPosition: 'center',
+    backgroundSize: "cover",
+    width: "110%"
   },
   paper: {
     margin: theme.spacing(8, 4),
