@@ -1,12 +1,14 @@
 const User  = require('../models/userModel');
-
+const production = true;
 const mongoose = require('mongoose');
 const CryptoJS = require('crypto-js');
 const jwt = require('jsonwebtoken');
 
-// const keys = require('keys../config/keys');
+let keys = "";
+if (!production)
+  keys = require('keys../config/keys');
 
-const mongodb = keys.mongourl || process.env.MONGO_URL;
+const mongodb = process.env.MONGO_URL || keys.mongourl;
 
 mongoose.connect(mongodb, {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
@@ -53,11 +55,11 @@ exports.login = async function (req, res, next) {
       id: user.id,
       username: user.username
     };
-
+    let secret = process.env.SECRET || keys.mongourl
     delete req.body;
     jwt.sign(
       payload,
-      process.env.SECRET,
+      secret,
       {
         expiresIn: 10800 // 3 hours in seconds
       },
