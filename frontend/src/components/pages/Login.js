@@ -38,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height:'100%',
     margin: theme.spacing(1),
-    marginLeft: theme.spacing(8)
+    marginLeft: theme.spacing(3),
+    marginTop: theme.spacing(-5)
   },
   avatar: {
     margin: theme.spacing(1),
@@ -65,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sideTextOne: {
     color: "rgb(255, 255, 255)",
-    marginTop: theme.spacing(20),
+    marginTop: theme.spacing(5),
     fontSize: "80px"
   },
   sideTextTwo: {
