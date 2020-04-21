@@ -3,7 +3,7 @@ const User  = require('../models/userModel');
 const mongoose = require('mongoose');
 const CryptoJS = require('crypto-js');
 const jwt = require('jsonwebtoken');
-const keys = require('../config/keys');
+const keys = require('../config/keys') || null;
 
 const mongodb = keys.mongourl || process.env.MONGO_URL;
 
