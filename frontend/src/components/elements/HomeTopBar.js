@@ -9,6 +9,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import { Redirect } from 'react-router-dom';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,15 +46,15 @@ export default function HomeTopBar() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.nav}>
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            {/* <ArrowBackIcon/> */}
+          <IconButton href="/" edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+              <ExitToAppIcon/>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             
           </Typography>
           {auth && (
             <div>
-              <IconButton
+              {/* <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
@@ -59,8 +62,8 @@ export default function HomeTopBar() {
                 color="inherit"
               >
                 <AccountCircle />
-              </IconButton>
-              <Menu
+              </IconButton> */}
+              {/* <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -76,8 +79,7 @@ export default function HomeTopBar() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
-                {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
-              </Menu>
+              </Menu>  */}
             </div>
           )}
         </Toolbar>
