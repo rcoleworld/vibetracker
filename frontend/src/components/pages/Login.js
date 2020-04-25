@@ -98,8 +98,7 @@ export default function Login() {
       </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          {/* <img className={classes.title} src={VibeLogo}/> */}
-          <h1>Vibe Tracker</h1>
+]          <h1>Vibe Tracker</h1>
           <form className={classes.form} noValidate>
             <TextField
               variant="outlined"

@@ -37,8 +37,6 @@ export default function Home() {
         imagetitle="maps"
         route="/nearby"
       />
-     
-
     </div>
   )
 }
