@@ -1,7 +1,7 @@
 # Vibe Tracker 
 
 An application to track your vibes.
-
+https://vibetracker.herokuapp.com
 ## Running:
 Must have npm and docker installed.
 ```

@@ -44,8 +44,6 @@ export default function NearbyVibes() {
         localStorage.removeItem('longitude')
         localStorage.setItem('latitude', position.coords.latitude.toString())
         localStorage.setItem('longitude', position.coords.longitude.toString())
-        console.log("Latitude is :", position.coords.latitude);
-        console.log("Longitude is :", position.coords.longitude);
       });
 
     }
