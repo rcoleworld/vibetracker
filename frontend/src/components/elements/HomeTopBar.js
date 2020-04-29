@@ -12,7 +12,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
-  root:{
+  root: {
     backgroundColor: 'rgb(0, 0, 0)'
   },
   grow: {
@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
-  
+
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
 
   const logout = () => {
@@ -91,7 +91,7 @@ export default function PrimarySearchAppBar() {
   }
 
   if (!isLoggedIn) {
-    return <Redirect to="/"/>
+    return <Redirect to="/" />
   }
   return (
     <div className={classes.grow}>
@@ -103,9 +103,9 @@ export default function PrimarySearchAppBar() {
             color="inherit"
             aria-label="open drawer"
             onClick={logout}
-            component={ RouterLink }
+            component={RouterLink}
           >
-            <ArrowBackIcon/>
+            <ArrowBackIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Vibe Tracker
@@ -126,7 +126,7 @@ export default function PrimarySearchAppBar() {
           <div className={classes.grow} />
         </Toolbar>
       </AppBar>
-      
+
     </div>
   );
 }
