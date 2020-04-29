@@ -29,7 +29,7 @@ export default function TrackVibe() {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
 
-  const add = (props) => {
+  const add = () => {
     addLocation(localStorage.getItem("username"), "title", "description", localStorage.getItem("latitude"), localStorage.getItem("longitude")).then((resp) => {
       if (resp) {
         let okResponse = JSON.stringify(resp).includes("New location created");

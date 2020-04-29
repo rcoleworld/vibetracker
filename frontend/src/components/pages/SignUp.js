@@ -103,7 +103,11 @@ export default function Signup() {
   }
 
   const signup = () => {
-    if (password === confirmPassword) {
+    if (username.length == 0 || password.length == 0|| confirmPassword.length == 0) {
+      enqueueSnackbar("One or more fields empty.", {variant: "error"})
+      return false;
+    }
+    else if (password === confirmPassword) {
       userSignup(username, password).then((resp) => {
         if(resp) {
           let okResponse = JSON.stringify(resp).includes('User created');
