@@ -15,6 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Beach from '../../beach.jpg';
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
 import {userLogin, decode} from '../../functions/login';
+import { useSnackbar } from 'notistack';
 
 const blue = "#0097a7"
 const black = "rgb(0, 0, 0)"
@@ -80,11 +81,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Login() {
+export default function Login(props) {
   const classes = useStyles();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [loggedIn, setLoggedIn] = React.useState(false);
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const changeUsername = (event) => {
     setUsername(event.target.value);
@@ -104,10 +107,12 @@ export default function Login() {
           return true;
         } else {
           console.log("Error Logging In");
+          enqueueSnackbar("Invalid email/password", {variant: "error"})
           return false;
         }
       } else {
         console.log("Could Not Fetch");
+        enqueueSnackbar("Invalid email/password", {variant: "error"})
         return false;
       }
     });

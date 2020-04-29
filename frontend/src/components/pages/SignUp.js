@@ -13,6 +13,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Beach from '../../beach.jpg';
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
 import { userSignup } from '../../functions/signup';
+import { useSnackbar } from 'notistack';
+
 const blue = "#0097a7"
 const black = "rgb(0, 0, 0)"
 const useStyles = makeStyles((theme) => ({
@@ -86,6 +88,8 @@ export default function Signup() {
   // password confirmation field
   const [confirmPassword, setConfirmPassword] = React.useState("");
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const changeUsername = (event) => {
     setUsername(event.target.value);
   }
@@ -108,15 +112,20 @@ export default function Signup() {
             return true;
           } else {
             console.log('Error creating user');
+            enqueueSnackbar("Could not create user!", {variant: "error"})
+
             return false;
           }
         } else {
           console.log('Could Not Fetch');
+          enqueueSnackbar("Could not create user!", {variant: "error"})
+
           return false;
         }
       });
     }
     else {
+      enqueueSnackbar("Username and password do not match!", {variant: "error"})
       return false;
     }
   }

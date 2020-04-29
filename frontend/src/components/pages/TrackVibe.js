@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ReactMapboxGl, { Layer, Feature, Marker } from 'react-mapbox-gl';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
+import { useSnackbar } from 'notistack';
 import {addLocation} from '../../functions/locations';
 
 const Map = ReactMapboxGl({
@@ -27,9 +27,20 @@ const useStyles = makeStyles((theme) => ({
 // 32.53369667134067
 export default function TrackVibe() {
   const classes = useStyles();
-  
-  const add = () => {
-    addLocation(localStorage.getItem("username"), "title", "description", localStorage.getItem("latitude"), localStorage.getItem("longitude"));
+  const { enqueueSnackbar } = useSnackbar();
+
+  const add = (props) => {
+    addLocation(localStorage.getItem("username"), "title", "description", localStorage.getItem("latitude"), localStorage.getItem("longitude")).then((resp) => {
+      if (resp) {
+        let okResponse = JSON.stringify(resp).includes("New location created");
+        if (okResponse) {
+          enqueueSnackbar("Vibe added!" , {variant: "success"})
+        }
+        else {
+          enqueueSnackbar("Could not add vibe", {variant: "error"})
+        }
+      }
+    })
   }
   useEffect(() => {
     if (navigator.geolocation) {
