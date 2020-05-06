@@ -4,7 +4,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { useSnackbar } from 'notistack';
 import {addLocation} from '../../functions/locations';
+
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogActions from '@material-ui/core/DialogActions';
+import TextField from '@material-ui/core/TextField';
 
 const Map = ReactMapboxGl({
   accessToken:
@@ -21,21 +28,54 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: `${black} !important`
     },
   },
-
+  button: {
+    margin: theme.spacing(3, 0, 2),
+    color: black,
+    "&:hover": {
+      //you want this to be the same as the backgroundColor above
+      color: `${black} !important`
+    },
+  },
+  borderOutline: {
+    borderWidth: "1px",
+    borderColor: `${black} !important`
+  },
+  labels: {
+    color: `${black} !important`
+  },
 }));
 
-//-92.6036243758132
-// 32.53369667134067
 export default function TrackVibe() {
+  const [open, setOpen] = React.useState(false);
+  const [title, setTitle] = React.useState("");
+  const [description, setDescription] = React.useState("");
+
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
 
+  const handleOpen = () => {
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
+  const changeTitle = (event) => {
+    setTitle(event.target.value);
+  }
+
+  const changeDescription = (event) => {
+    setDescription(event.target.value);
+  }
+
   const add = () => {
-    addLocation(localStorage.getItem("username"), "title", "description", localStorage.getItem("latitude"), localStorage.getItem("longitude")).then((resp) => {
+    addLocation(localStorage.getItem("username"), title, description, localStorage.getItem("latitude"), localStorage.getItem("longitude")).then((resp) => {
       if (resp) {
         let okResponse = JSON.stringify(resp).includes("New location created");
         if (okResponse) {
           enqueueSnackbar("Vibe added!" , {variant: "success"})
+          setOpen(false);
         }
         else {
           enqueueSnackbar("Could not add vibe", {variant: "error"})
@@ -65,9 +105,75 @@ export default function TrackVibe() {
         fullWidth
         variant="contained"
         color="primary"
-        onClick={add}
+        onClick={handleOpen}
         className={classes.submit}
-      >Add Vibe</Button>
+      >Add Vibe
+      </Button>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Add Vibe</DialogTitle>
+        <DialogContent>
+          <TextField
+            onChange={changeTitle}
+            className={classes.borderOutline}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            value={title}
+            name="title"
+            label="Title"
+            type="text"
+            id="title"
+            autoComplete="title"
+            InputLabelProps={{
+              classes: {
+                focused: classes.labels
+              }
+            }}
+            InputProps={{
+              classes: {
+                root: classes.borderOutline,
+                focused: classes.borderOutline,
+                notchedOutline: classes.borderOutline
+              }
+            }}
+          />
+          <TextField
+            onChange={changeDescription}
+            className={classes.borderOutline}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            value={description}
+            name="description"
+            label="Description"
+            type="text"
+            id="description"
+            autoComplete="description"
+            InputLabelProps={{
+              classes: {
+                focused: classes.labels
+              }
+            }}
+            InputProps={{
+              classes: {
+                root: classes.borderOutline,
+                focused: classes.borderOutline,
+                notchedOutline: classes.borderOutline
+              }
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button className={classes.button} onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button className={classes.button} onClick={add} color="primary">
+            Add Vibe
+          </Button>
+        </DialogActions>
+      </Dialog>
       {long && lat &&
         <Map
           style="mapbox://styles/mapbox/streets-v10"

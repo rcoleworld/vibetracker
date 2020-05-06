@@ -34,12 +34,12 @@ export default function Home() {
         imagetitle="pin"
         route={"/track"}
       />
-      {/* <MenuCard
+      <MenuCard
         title="My Vibes"
         image={Nature}
         imagetitle="pin"
         route="/vibes"
-      /> */}
+      />
       <MenuCard
         title="Nearby Vibes"
         image={Maps}
