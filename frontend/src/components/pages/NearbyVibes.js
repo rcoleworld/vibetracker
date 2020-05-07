@@ -35,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     color: 'rgb(255, 255, 255)',
-    width: "50%",
-    height: "50%"
+    width: "3%",
+    height: "3%"
   },
   button: {
     margin: theme.spacing(3, 0, 2),
