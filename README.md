@@ -4,7 +4,7 @@ Ever stumble upon a an interesting or unique location. Vibe tracker allows you t
 Disclaimer: This takes a while to load due to it running on Heroku free tier.
 https://vibetracker.herokuapp.com
 ## Running:
-Must have npm and docker installed.
+Must have npm installed.
 ```
 $ npm install --prefix
 $ npm install --prefix ./client
